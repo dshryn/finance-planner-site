@@ -1,0 +1,28 @@
+/* Budget Screen Background */
+#budget-screen {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Adjust form appearance */
+.budget-form {
+    background: rgba(0, 0, 0, 0.7);
+    /* Dark overlay for readability */
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 500px;
+}
+
+/* Adjust progress bars */
+.budget-progress {
+    background: rgba(255, 255, 255, 0.3);
+    height: 10px;
+    border-radius: 5px;
+}

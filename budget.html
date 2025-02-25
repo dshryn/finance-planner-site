@@ -1,0 +1,160 @@
+<html>
+
+<head>
+    <title>Budget Planner</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+        }
+
+        .container {
+            width: 300px;
+            margin: auto;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 15px;
+            background: lightgray;
+        }
+
+        .progress {
+            height: 100%;
+            background: green;
+            width: 0%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Budget Planning</h2>
+    <div class="container">
+        <label>Category Name:</label>
+        <input type="text" id="categoryName" placeholder="Enter category">
+        <br><br>
+
+        <label>Budget Amount:</label>
+        <input type="number" id="budgetAmount">
+        <button onclick="setBudget()">Set Budget</button>
+    </div>
+
+    <h3>Add Spending</h3>
+    <div class="container">
+        <label>Category Name:</label>
+        <input type="text" id="spendCategory" placeholder="Enter category">
+        <br><br>
+
+        <label>Amount Spent:</label>
+        <input type="number" id="spendAmount">
+        <button onclick="addSpending()">Add Spending</button>
+    </div>
+
+    <h3>Budget List</h3>
+    <div id="budgetList"></div>
+
+    <h3>Budget vs. Spending Report</h3>
+    <div style="width: 80%; margin: auto;">
+        <canvas id="barChart" height="150"></canvas>
+    </div>
+
+    <script>
+        var budgets = {};
+        var chartInstance = null; // Store the chart instance
+
+        function setBudget() {
+            var category = $("#categoryName").val().trim();
+            var budget = $("#budgetAmount").val();
+
+            if (category === "" || !budget || budget <= 0) {
+                alert("Enter a valid category and budget!");
+                return;
+            }
+
+            if (!budgets[category]) {
+                budgets[category] = { budget: parseInt(budget), spent: 0 };
+            } else {
+                budgets[category].budget = parseInt(budget);
+            }
+
+            updateBudgetList();
+        }
+
+        function addSpending() {
+            var category = $("#spendCategory").val().trim();
+            var amount = $("#spendAmount").val();
+
+            if (category === "" || !amount || amount <= 0) {
+                alert("Enter a valid category and spending amount!");
+                return;
+            }
+
+            if (!budgets[category]) {
+                alert("Set a budget for this category first!");
+                return;
+            }
+
+            budgets[category].spent += parseInt(amount);
+            updateBudgetList();
+        }
+
+        function updateBudgetList() {
+            $("#budgetList").html("");
+            for (var category in budgets) {
+                var progress = (budgets[category].spent / budgets[category].budget) * 100;
+                var color = progress > 100 ? "red" : "green";
+
+                $("#budgetList").append(`
+                    <div>
+                        <b>${category}:</b> ₹${budgets[category].spent} / ₹${budgets[category].budget}
+                        <div class="progress-bar">
+                            <div class="progress" style="width:${progress}%; background:${color};"></div>
+                        </div>
+                        ${progress > 100 ? "<p style='color:red;'>Budget Exceeded!</p>" : ""}
+                    </div><br>
+                `);
+            }
+
+            generateCharts();
+        }
+
+        function generateCharts() {
+            var labels = Object.keys(budgets);
+            var spentValues = labels.map(cat => budgets[cat].spent);
+            var budgetValues = labels.map(cat => budgets[cat].budget);
+
+            var ctx2 = document.getElementById("barChart").getContext("2d");
+
+            // Destroy the previous chart instance before creating a new one
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
+
+            chartInstance = new Chart(ctx2, {
+                type: "bar",
+                data: {
+                    labels: labels,
+                    datasets: [
+                        { label: "Spent", data: spentValues, backgroundColor: "red" },
+                        { label: "Budget", data: budgetValues, backgroundColor: "blue" }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+        }
+
+        $(document).ready(updateBudgetList);
+    </script>
+
+</body>
+
+</html>
