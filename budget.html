@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -6,25 +7,69 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {
-            font-family: Arial;
+            font-family: Arial, sans-serif;
             text-align: center;
+            background-image: url('https://images.unsplash.com/photo-1517336714731-489689fd1ca8');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
         }
 
         .container {
             width: 300px;
             margin: auto;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
         }
 
         .progress-bar {
             width: 100%;
             height: 15px;
             background: lightgray;
+            border-radius: 5px;
         }
 
         .progress {
             height: 100%;
             background: green;
             width: 0%;
+            border-radius: 5px;
+        }
+
+        input,
+        button {
+            margin: 5px 0;
+            padding: 8px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        input {
+            width: 80%;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        button {
+            background: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        canvas {
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            padding: 10px;
         }
     </style>
 </head>
@@ -63,7 +108,7 @@
 
     <script>
         var budgets = {};
-        var chartInstance = null; // Store the chart instance
+        var chartInstance = null;
 
         function setBudget() {
             var category = $("#categoryName").val().trim();
@@ -128,7 +173,6 @@
 
             var ctx2 = document.getElementById("barChart").getContext("2d");
 
-            // Destroy the previous chart instance before creating a new one
             if (chartInstance) {
                 chartInstance.destroy();
             }
