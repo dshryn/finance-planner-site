@@ -5,143 +5,133 @@
     <title>Budget Planner</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-image: url('https://images.unsplash.com/photo-1517336714731-489689fd1ca8');
+            background-image: url('https://images.unsplash.com/photo-1523289333742-be1143f6b766?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
             background-size: cover;
             background-position: center;
+            background-repeat: no-repeat;
             background-attachment: fixed;
-            color: white;
-        }
-
-        .app-bar {
+            min-height: 100vh;
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: #007bff;
-            padding: 15px;
-            font-size: 20px;
-            font-weight: bold;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+            text-align: center;
             color: white;
+            overflow-y: auto;
         }
 
-        .app-bar .logo {
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .app-bar .nav-links {
+        /* Navbar Styling */
+        .navbar-custom {
             display: flex;
-            gap: 15px;
+            justify-content: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            padding: 15px 0;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+            z-index: 1000;
         }
 
-        .app-bar .nav-links a {
+        .navbar-custom a {
+            flex: 1;
+            text-align: center;
             color: white;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            text-transform: uppercase;
             text-decoration: none;
-            font-size: 18px;
+            padding: 15px;
+            border-right: 2px solid rgba(255, 255, 255, 0.2);
         }
 
-        .container {
-            width: 300px;
-            margin: auto;
-            background: rgba(0, 0, 0, 0.7);
+        .navbar-custom a:last-child {
+            border-right: none;
+        }
+
+        .navbar-custom a.active {
+            color: black;
+        }
+
+        @media (max-width: 768px) {
+            .navbar-custom {
+                flex-direction: column;
+            }
+
+            .navbar-custom a {
+                border-right: none;
+                border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+            }
+        }
+
+        .content {
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding-top: 80px;
+            padding-bottom: 40px;
+        }
+
+        .dashboard-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
             padding: 20px;
             border-radius: 10px;
-        }
-
-        .progress-bar {
+            max-width: 600px;
             width: 100%;
-            height: 15px;
-            background: lightgray;
-            border-radius: 5px;
-        }
-
-        .progress {
-            height: 100%;
-            background: green;
-            width: 0%;
-            border-radius: 5px;
-        }
-
-        input,
-        button {
-            margin: 5px 0;
-            padding: 8px;
-            border-radius: 5px;
-            border: none;
-        }
-
-        input {
-            width: 80%;
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-        }
-
-        input::placeholder {
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        button {
-            background: #007bff;
-            color: white;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background: #0056b3;
-        }
-
-        canvas {
-            background: rgba(0, 0, 0, 0.7);
-            border-radius: 10px;
-            padding: 10px;
+            text-align: left;
+            color: black;
+            margin-bottom: 20px;
         }
     </style>
 </head>
 
 <body>
-    <div class="app-bar">
-        <div class="logo">Budget Planner</div>
-        <div class="nav-links">
-            <a href="index.html">Dashboard</a>
-            <a href="transactions.html">Transactions</a>
-            <a href="reports.html">Reports</a>
-            <a href="settings.html">Settings</a>
+    <!-- Navbar -->
+    <nav class="navbar-custom">
+        <a href="index.html">Dashboard</a>
+        <a href="transactions.html">Transactions</a>
+        <a href="budget.html" class="active">Budget</a>
+        <a href="reports.html">Reports</a>
+        <a href="settings.html">Settings</a>
+    </nav>
+
+    <div class="content">
+        <div class="dashboard-card">
+            <h2 class="text-center">Budget Planning</h2>
+            <div class="card bg-dark text-white p-3">
+                <label>Category Name:</label>
+                <input type="text" id="categoryName" placeholder="Enter category">
+                <br><br>
+                <label>Budget Amount:</label>
+                <input type="number" id="budgetAmount">
+                <button onclick="setBudget()">Set Budget</button>
+                <br><br>
+                <h3>Add Spending</h3>
+                <label>Category Name:</label>
+                <input type="text" id="spendCategory" placeholder="Enter category">
+                <br><br>
+                <label>Amount Spent:</label>
+                <input type="number" id="spendAmount">
+                <button onclick="addSpending()">Add Spending</button>
+                <br><br>
+                <h3>Budget List</h3>
+                <div id="budgetList"></div>
+                <h3>Budget vs. Spending Report</h3>
+                <canvas id="barChart" height="150"></canvas>
+            </div>
         </div>
     </div>
 
-    <h2>Budget Planning</h2>
-    <div class="container">
-        <label>Category Name:</label>
-        <input type="text" id="categoryName" placeholder="Enter category">
-        <br><br>
-
-        <label>Budget Amount:</label>
-        <input type="number" id="budgetAmount">
-        <button onclick="setBudget()">Set Budget</button>
-    </div>
-
-    <h3>Add Spending</h3>
-    <div class="container">
-        <label>Category Name:</label>
-        <input type="text" id="spendCategory" placeholder="Enter category">
-        <br><br>
-
-        <label>Amount Spent:</label>
-        <input type="number" id="spendAmount">
-        <button onclick="addSpending()">Add Spending</button>
-    </div>
-
-    <h3>Budget List</h3>
-    <div id="budgetList"></div>
-
-    <h3>Budget vs. Spending Report</h3>
-    <div style="width: 80%; margin: auto;">
-        <canvas id="barChart" height="150"></canvas>
-    </div>
-
+    <script src="js/bootstrap.bundle.min.js"></script>
     <script>
         var budgets = {};
         var chartInstance = null;
@@ -149,35 +139,26 @@
         function setBudget() {
             var category = $("#categoryName").val().trim();
             var budget = $("#budgetAmount").val();
-
             if (category === "" || !budget || budget <= 0) {
                 alert("Enter a valid category and budget!");
                 return;
             }
-
-            if (!budgets[category]) {
-                budgets[category] = { budget: parseInt(budget), spent: 0 };
-            } else {
-                budgets[category].budget = parseInt(budget);
-            }
-
+            budgets[category] = budgets[category] || { budget: 0, spent: 0 };
+            budgets[category].budget = parseInt(budget);
             updateBudgetList();
         }
 
         function addSpending() {
             var category = $("#spendCategory").val().trim();
             var amount = $("#spendAmount").val();
-
             if (category === "" || !amount || amount <= 0) {
                 alert("Enter a valid category and spending amount!");
                 return;
             }
-
             if (!budgets[category]) {
                 alert("Set a budget for this category first!");
                 return;
             }
-
             budgets[category].spent += parseInt(amount);
             updateBudgetList();
         }
@@ -187,7 +168,6 @@
             for (var category in budgets) {
                 var progress = (budgets[category].spent / budgets[category].budget) * 100;
                 var color = progress > 100 ? "red" : "green";
-
                 $("#budgetList").append(`
                     <div>
                         <b>${category}:</b> ₹${budgets[category].spent} / ₹${budgets[category].budget}
@@ -198,7 +178,6 @@
                     </div><br>
                 `);
             }
-
             generateCharts();
         }
 
@@ -206,13 +185,8 @@
             var labels = Object.keys(budgets);
             var spentValues = labels.map(cat => budgets[cat].spent);
             var budgetValues = labels.map(cat => budgets[cat].budget);
-
             var ctx2 = document.getElementById("barChart").getContext("2d");
-
-            if (chartInstance) {
-                chartInstance.destroy();
-            }
-
+            if (chartInstance) chartInstance.destroy();
             chartInstance = new Chart(ctx2, {
                 type: "bar",
                 data: {
@@ -221,19 +195,9 @@
                         { label: "Spent", data: spentValues, backgroundColor: "red" },
                         { label: "Budget", data: budgetValues, backgroundColor: "blue" }
                     ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: { beginAtZero: true }
-                    }
                 }
             });
         }
-
-        $(document).ready(updateBudgetList);
     </script>
 </body>
-
 </html>
