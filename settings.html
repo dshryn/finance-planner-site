@@ -79,7 +79,7 @@
             padding-bottom: 40px;
         }
 
-        .settings-card {
+        .login-card {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(15px);
             padding: 20px;
@@ -90,11 +90,17 @@
             color: black;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
         }
-        .btn-primary{
+        .btn-log{
             background: black;
             text-align: center;
             color: white;
         }
+        .btn-sign{
+            background: grey;
+            text-align: center;
+            color: black;
+        }
+        
     </style>
 </head>
 
@@ -105,12 +111,12 @@
         <a href="transactions.html">Transactions</a>
         <a href="budget.html">Budget</a>
         <a href="reports.html">Reports</a>
-        <a href="settings.html" class="active">Settings</a>
+        <a href="settings.html" class="active">login</a>
     </nav>
 
     <div class="content">
-        <div class="settings-card">
-            <h2 class="text-center">Settings</h2>
+        <div class="login-card">
+            <h2 class="text-center">Login</h2>
             <form>
                 <div class="mb-3">
                     <label for="username" class="form-label">Username</label>
@@ -127,12 +133,8 @@
                     <input type="password" class="form-control" id="password" placeholder="Enter new password">
                 </div>
                 <br>
-                <div class="mb-3 form-check">
-                    <input type="checkbox" class="form-check-input" id="darkMode">
-                    <label class="form-check-label" for="darkMode">Enable Dark Mode</label>
-                </div>
-                <br>
-                <button type="submit" class="btn-primary">Save Changes</button>
+                <button type="submitLog" class="btn-log">Login</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="submitSup" class="btn-sign">Signup</button>
             </form>
         </div>
     </div>
