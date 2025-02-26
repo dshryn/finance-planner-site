@@ -1,28 +1,39 @@
-/* Budget Screen Background */
-#budget-screen {
-    min-height: 100vh;
+.app-bar {
+    background-color: #343a40;
+    padding: 10px 20px;
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
+}
+
+.app-bar-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.app-bar-brand {
     color: white;
-    text-align: center;
-    padding: 20px;
+    font-size: 1.5rem;
+    text-decoration: none;
+    font-weight: bold;
 }
 
-/* Adjust form appearance */
-.budget-form {
-    background: rgba(0, 0, 0, 0.7);
-    /* Dark overlay for readability */
-    padding: 20px;
-    border-radius: 10px;
-    width: 80%;
-    max-width: 500px;
+.app-bar-menu {
+    display: flex;
+    gap: 20px;
 }
 
-/* Adjust progress bars */
-.budget-progress {
-    background: rgba(255, 255, 255, 0.3);
-    height: 10px;
+.app-bar-link {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 8px 12px;
     border-radius: 5px;
+}
+
+.app-bar-link:hover,
+.app-bar-link.active {
+    background-color: #495057;
 }

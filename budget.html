@@ -16,6 +16,33 @@
             color: white;
         }
 
+        .app-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #007bff;
+            padding: 15px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .app-bar .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .app-bar .nav-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .app-bar .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
         .container {
             width: 300px;
             margin: auto;
@@ -75,6 +102,15 @@
 </head>
 
 <body>
+    <div class="app-bar">
+        <div class="logo">Budget Planner</div>
+        <div class="nav-links">
+            <a href="index.html">Dashboard</a>
+            <a href="transactions.html">Transactions</a>
+            <a href="reports.html">Reports</a>
+            <a href="settings.html">Settings</a>
+        </div>
+    </div>
 
     <h2>Budget Planning</h2>
     <div class="container">
@@ -198,7 +234,6 @@
 
         $(document).ready(updateBudgetList);
     </script>
-
 </body>
 
 </html>

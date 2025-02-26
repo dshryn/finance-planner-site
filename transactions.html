@@ -10,71 +10,48 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="#">Finance Planner</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="index.html">Dashboard</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="transactions.html">Transactions</a></li>
-                    <li class="nav-item"><a class="nav-link" href="budget.html">Budget</a></li>
-                    <li class="nav-item"><a class="nav-link" href="reports.html">Reports</a></li>
-                    <li class="nav-item"><a class="nav-link" href="settings.html">Settings</a></li>
-                </ul>
+    <nav class="app-bar">
+        <div class="app-bar-container">
+            <a class="app-bar-brand" href="#">Finance Planner</a>
+            <div class="app-bar-menu">
+                <a class="app-bar-link" href="index.html">Dashboard</a>
+                <a class="app-bar-link active" href="transactions.html">Transactions</a>
+                <a class="app-bar-link" href="budget.html">Budget</a>
+                <a class="app-bar-link" href="reports.html">Reports</a>
+                <a class="app-bar-link" href="settings.html">Settings</a>
             </div>
         </div>
     </nav>
 
-    <div class="container mt-4">
-        <h2 class="text-center">Transactions</h2>
-
-        <form id="transaction-form" class="mb-4">
-            <div class="row">
-                <div class="col-md-3">
-                    <input type="text" id="description" class="form-control" placeholder="Description" required>
-                </div>
-                <div class="col-md-2">
-                    <input type="number" id="amount" class="form-control" placeholder="Amount" required>
-                </div>
-                <div class="col-md-2">
-                    <select id="category" class="form-control">
-                        <option value="Food">Food</option>
-                        <option value="Travel">Travel</option>
-                        <option value="Rent">Rent</option>
-                        <option value="Shopping">Shopping</option>
-                        <option value="Other">Other</option>
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <input type="date" id="date" class="form-control" required>
-                </div>
-                <div class="col-md-2">
-                    <button type="submit" class="btn btn-primary">Add</button>
-                </div>
-            </div>
-        </form>
-
-        <table class="table table-striped">
-            <thead>
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Transactions</h2>
+        <table class="table table-striped text-center">
+            <thead class="table-dark">
                 <tr>
-                    <th>Description</th>
-                    <th>Amount</th>
-                    <th>Category</th>
                     <th>Date</th>
-                    <th>Actions</th>
+                    <th>Category</th>
+                    <th>Amount</th>
+                    <th>Type</th>
                 </tr>
             </thead>
-            <tbody id="transaction-list">
-                <!-- Transactions will be dynamically added here -->
+            <tbody>
+                <tr>
+                    <td>2025-02-25</td>
+                    <td>Food</td>
+                    <td>$50</td>
+                    <td>Expense</td>
+                </tr>
+                <tr>
+                    <td>2025-02-24</td>
+                    <td>Salary</td>
+                    <td>$1000</td>
+                    <td>Income</td>
+                </tr>
             </tbody>
         </table>
     </div>
 
     <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/transactions.js"></script>
 </body>
 
 </html>

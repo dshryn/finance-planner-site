@@ -10,42 +10,25 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="#">Finance Planner</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="index.html">Dashboard</a></li>
-                    <li class="nav-item"><a class="nav-link" href="transactions.html">Transactions</a></li>
-                    <li class="nav-item"><a class="nav-link" href="budget.html">Budget</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="reports.html">Reports</a></li>
-                    <li class="nav-item"><a class="nav-link" href="settings.html">Settings</a></li>
-                </ul>
+    <nav class="app-bar">
+        <div class="app-bar-container">
+            <a class="app-bar-brand" href="#">Finance Planner</a>
+            <div class="app-bar-menu">
+                <a class="app-bar-link" href="index.html">Dashboard</a>
+                <a class="app-bar-link" href="transactions.html">Transactions</a>
+                <a class="app-bar-link" href="budget.html">Budget</a>
+                <a class="app-bar-link active" href="reports.html">Reports</a>
+                <a class="app-bar-link" href="settings.html">Settings</a>
             </div>
         </div>
     </nav>
 
-    <div class="container mt-4">
-        <h2 class="text-center">Reports & Insights</h2>
-
-        <div class="row">
-            <div class="col-md-6">
-                <h5>Spending Breakdown</h5>
-                <canvas id="spendingPieChart"></canvas>
-            </div>
-            <div class="col-md-6">
-                <h5>Monthly Expense Trends</h5>
-                <canvas id="expenseBarChart"></canvas>
-            </div>
-        </div>
+    <div class="container mt-5">
+        <h2 class="text-center">Financial Reports</h2>
+        <p class="text-center">Graphs and reports will be displayed here.</p>
     </div>
 
     <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="js/reports.js"></script>
 </body>
 
 </html>
