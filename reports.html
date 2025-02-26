@@ -16,7 +16,9 @@
             background-attachment: fixed;
             min-height: 100vh; 
             display: flex;
-            flex-direction: column;">
+            flex-direction: column;
+            align-items: center; /* Center the card horizontally */
+            justify-content: center; /* Center the card vertically */">
 
     <!-- Navbar -->
     <nav class="navbar-custom">
@@ -28,7 +30,7 @@
     </nav>
 
     <div class="container mt-4 content">
-        <div class="card p-4 bg-light shadow">
+        <div class="card">
             <h2 class="text-center">Reports & Insights</h2>
             <div class="row">
                 <div class="col-md-6">
@@ -48,6 +50,18 @@
     <script src="js/reports.js"></script>
 
     <style>
+        body {
+            background-image: url('https://images.unsplash.com/photo-1595468760552-f1dce2325731?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            background-position: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            color: white;
+            align-items: center; /* Center the card horizontally */
+            justify-content: center; /* Center the card vertically */
+        }
         /* Navbar Styling */
         .navbar-custom {
             display: flex;
@@ -91,16 +105,29 @@
                 border-bottom: 2px solid rgba(255, 255, 255, 0.2);
             }
         }
-
+        .card{
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px); /* Apply blur to the card */
+            padding: 20px;
+            align-items: center;
+            align-content: center;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 100%;
+            text-align: left;
+            color: black;
+            box-shadow: 0px 2000px 10px rgba(0, 0, 0, 0.2);
+        }
         .content {
+            background: rgba(255, 255, 255, 0.1);
             flex: 1;
-            overflow-y: auto;
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             align-items: center;
             justify-content: center;
-            padding-top: 80px;
-            padding-bottom: 40px;
+            padding: 20px;
+            border-radius: 10px;
+            width: 100%;
         }
     </style>
 </body>
