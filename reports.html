@@ -17,10 +17,9 @@
             min-height: 100vh; 
             display: flex;
             flex-direction: column;
-            align-items: center; /* Center the card horizontally */
-            justify-content: center; /* Center the card vertically */">
+            align-items: center; 
+            justify-content: center;">
 
-    <!-- Navbar -->
     <nav class="navbar-custom">
         <a href="index.html">Dashboard</a>
         <a href="transactions.html">Transactions</a>
@@ -51,7 +50,7 @@
 
     <style>
         body {
-            background-image: url('https://images.unsplash.com/photo-1595468760552-f1dce2325731?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            background-image: url('https://images.unsplash.com/photo-1595468760552-f1dce2325731?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
             background-position: center;
             min-height: 100vh;
             display: flex;
@@ -59,10 +58,10 @@
             font-family: Arial, sans-serif;
             text-align: center;
             color: white;
-            align-items: center; /* Center the card horizontally */
-            justify-content: center; /* Center the card vertically */
+            align-items: center;
+            justify-content: center;
         }
-        /* Navbar Styling */
+
         .navbar-custom {
             display: flex;
             justify-content: center;
@@ -89,12 +88,15 @@
             padding: 15px;
             border-right: 2px solid rgba(255, 255, 255, 0.2);
         }
+
         .navbar-custom a:last-child {
             border-right: none;
         }
+
         .navbar-custom a.active {
             color: black;
         }
+
         @media (max-width: 768px) {
             .navbar-custom {
                 flex-direction: column;
@@ -105,9 +107,10 @@
                 border-bottom: 2px solid rgba(255, 255, 255, 0.2);
             }
         }
-        .card{
+
+        .card {
             background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(15px); /* Apply blur to the card */
+            backdrop-filter: blur(15px);
             padding: 20px;
             align-items: center;
             align-content: center;
@@ -118,6 +121,7 @@
             color: black;
             box-shadow: 0px 2000px 10px rgba(0, 0, 0, 0.2);
         }
+
         .content {
             background: rgba(255, 255, 255, 0.1);
             flex: 1;

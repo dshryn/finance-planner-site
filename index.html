@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
-<body style="background-image: url('https://images.unsplash.com/photo-1544377193-33dcf4d68fb5?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); 
+<body style="background-image: url('https://images.unsplash.com/photo-1544377193-33dcf4d68fb5?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fHx8fA%3D%3D'); 
             background-size: cover; 
             background-position: center; 
             background-repeat: no-repeat; 
@@ -18,124 +18,126 @@
             display: flex;
             flex-direction: column;">
 
-<!-- Navbar -->
-<nav class="navbar-custom">
-    <a href="index.html" class="active">Dashboard</a>
-    <a href="transactions.html">Transactions</a>
-    <a href="budget.html">Budget</a>
-    <a href="reports.html">Reports</a>
-    <a href="login.html">Login</a>
-</nav>
+    <!-- Navbar -->
+    <nav class="navbar-custom">
+        <a href="index.html" class="active">Dashboard</a>
+        <a href="transactions.html">Transactions</a>
+        <a href="budget.html">Budget</a>
+        <a href="reports.html">Reports</a>
+        <a href="settings.html">Settings</a>
+    </nav>
 
-<style>
-    /* Navbar Styling */
-    .navbar-custom {
-        display: flex;
-        justify-content: center;
-        position: fixed;
-        width: 100%;
-        top: 0;
-        left: 0;
-        padding: 15px 0;
-        backdrop-filter: blur(10px); /* Blur Effect */
-        background: rgba(255, 255, 255, 0.1); /* Transparent Background */
-        border-bottom: 2px solid rgba(255, 255, 255, 0.2);
-        z-index: 1000;
-    }
-    .navbar-custom a.active {
+    <style>
+        .navbar-custom {
+            display: flex;
+            justify-content: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            padding: 15px 0;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+            z-index: 1000;
+        }
+
+        .navbar-custom a.active {
             color: black;
         }
 
-    .navbar-custom a {
-        flex: 1;
-        text-align: center;
-        color: white;
-        font-family: 'Inter', sans-serif;
-        font-weight: 700;
-        font-size: 16px;
-        text-transform: uppercase;
-        text-decoration: none;
-        padding: 15px;
-        border-right: 2px solid rgba(255, 255, 255, 0.2); /* Divider between links */
-    }
-
-    .navbar-custom a:last-child {
-        border-right: none; /* Remove divider from the last item */
-    }
-
-    /* Responsive Navbar */
-    @media (max-width: 768px) {
-        .navbar-custom {
-            flex-direction: column;
-        }
-
         .navbar-custom a {
-            border-right: none;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+            flex: 1;
+            text-align: center;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 15px;
+            border-right: 2px solid rgba(255, 255, 255, 0.2);
         }
-    }
 
-    /* Content Styling */
-    .content {
-        flex: 1;
-        overflow-y: auto; /* Allows scrolling but not excessive */
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding-top: 80px; /* Space below navbar */
-        padding-bottom: 40px;
-    }
+        .navbar-custom a:last-child {
+            border-right: none;
+        }
 
-    /* Card Styling */
-    .dashboard-container {
-        max-width: 600px;
-        width: 100%;
-        margin: auto;
-        margin-top: 120px; /* Shifted down */
-    }
-</style>
+        @media (max-width: 768px) {
+            .navbar-custom {
+                flex-direction: column;
+            }
 
-<!-- Scrollable Content -->
-<div class="content">
-    <div class="dashboard-container">
-        <h2 style="font-family: 'Inter', sans-serif; font-weight: 700; text-align: left; margin-bottom: 10px;">Dashboard</h2>
+            .navbar-custom a {
+                border-right: none;
+                border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+            }
+        }
 
-        <!-- Card containing income, expenses, and balance -->
-        <div class="card text-white bg-dark" style="opacity: 0.9;">
-            <div class="card-body text-center">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="card bg-success text-white">
-                            <div class="card-body">
-                                <h5 class="card-title" style="background: rgba(0, 0, 0, 0.6); padding: 5px; border-radius: 5px;">Total Income</h5>
-                                <p class="card-text" id="total-income">$0.00</p>
+        .content {
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding-top: 80px;
+            padding-bottom: 40px;
+        }
+
+        .dashboard-container {
+            max-width: 600px;
+            width: 100%;
+            margin: auto;
+            margin-top: 120px;
+        }
+    </style>
+
+    <div class="content">
+        <div class="dashboard-container">
+            <h2 style="font-family: 'Inter', sans-serif; font-weight: 700; text-align: left; margin-bottom: 10px;">
+                Dashboard</h2>
+
+            <div class="card text-white bg-dark" style="opacity: 0.9;">
+                <div class="card-body text-center">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card bg-success text-white">
+                                <div class="card-body">
+                                    <h5 class="card-title"
+                                        style="background: rgba(0, 0, 0, 0.6); padding: 5px; border-radius: 5px;">Total
+                                        Income</h5>
+                                    <p class="card-text" id="total-income">$0.00</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card bg-danger text-white">
-                            <div class="card-body">
-                                <h5 class="card-title" style="background: rgba(0, 0, 0, 0.6); padding: 5px; border-radius: 5px;">Total Expenses</h5>
-                                <p class="card-text" id="total-expenses">$0.00</p>
+                        <div class="col-md-4">
+                            <div class="card bg-danger text-white">
+                                <div class="card-body">
+                                    <h5 class="card-title"
+                                        style="background: rgba(0, 0, 0, 0.6); padding: 5px; border-radius: 5px;">Total
+                                        Expenses</h5>
+                                    <p class="card-text" id="total-expenses">$0.00</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card bg-primary text-white">
-                            <div class="card-body">
-                                <h5 class="card-title" style="background: rgba(0, 0, 0, 0.6); padding: 5px; border-radius: 5px;">Balance</h5>
-                                <p class="card-text" id="balance">$0.00</p>
+                        <div class="col-md-4">
+                            <div class="card bg-primary text-white">
+                                <div class="card-body">
+                                    <h5 class="card-title"
+                                        style="background: rgba(0, 0, 0, 0.6); padding: 5px; border-radius: 5px;">
+                                        Balance</h5>
+                                    <p class="card-text" id="balance">$0.00</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>  
-</div>
+    </div>
 
-<script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
