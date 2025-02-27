@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
 
 <head>
@@ -89,19 +88,61 @@
             color: black;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
         }
-
         .btn-log {
             background: black;
             text-align: center;
             color: white;
         }
-
-        .btn-sign {
+        /* .btn-sign {
             background: grey;
             text-align: center;
             color: black;
+        } */
+        .error {
+            color: red;
+            font-size: 14px;
         }
     </style>
+    <script>
+        function validateForm(event) {
+            event.preventDefault();
+            let email = document.getElementById('email').value;
+            let password = document.getElementById('password').value;
+            let emailError = document.getElementById('emailError');
+            let passwordError = document.getElementById('passwordError');
+            let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            let passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+            emailError.textContent = "";
+            passwordError.textContent = "";
+            let valid = true;
+
+            if (!emailPattern.test(email)) {
+                emailError.textContent = "Invalid email format (example@domain.com)";
+                valid = false;
+            }
+
+            if (!passwordPattern.test(password)) {
+                passwordError.textContent = "Password must be at least 8 characters long, contain an uppercase letter, lowercase letter, number, and special character.";
+                valid = false;
+            }
+
+            if (valid) {
+                alert("Form submitted successfully!");
+            }
+        }
+        function togglePassword() {
+            let passwordField = document.getElementById('password');
+            let toggleIcon = document.getElementById('togglePassword');
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                toggleIcon.textContent = "👁️";
+            } else {
+                passwordField.type = "password";
+                toggleIcon.textContent = "👁️‍🗨️";
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -116,7 +157,7 @@
     <div class="content">
         <div class="login-card">
             <h2 class="text-center">Login</h2>
-            <form>
+            <form onsubmit="validateForm(event)">
                 <div class="mb-3">
                     <label for="username" class="form-label">Username</label>
                     <input type="text" class="form-control" id="username" placeholder="Enter your username">
@@ -125,15 +166,20 @@
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
                     <input type="email" class="form-control" id="email" placeholder="Enter your email">
+                    <div class="error" id="emailError"></div>
                 </div>
                 <br>
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" placeholder="Enter new password">
+                    <div class="password-container">
+                        <input type="password" class="form-control" id="password" placeholder="Enter password">
+                        <span class="toggle-password" id="togglePassword" onclick="togglePassword()">👁️‍🗨️</span>
+                    </div>
+                    <div class="error" id="passwordError"></div>
                 </div>
                 <br>
-                <button type="submitLog" class="btn-log">Login</button>
-                <button type="submitSup" class="btn-sign">Signup</button>
+                <button type="submit" class="btn-log">Login</button>
+                <!-- <button type="button" class="btn-sign">Signup</button> -->
             </form>
         </div>
     </div>
