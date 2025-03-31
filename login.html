@@ -1,4 +1,5 @@
 <html>
+
 <head>
     <title>Budget Planner - Login</title>
     <style>
@@ -74,7 +75,9 @@
             color: black;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
         }
-        .btn-log, .btn-sign {
+
+        .btn-log,
+        .btn-sign {
             width: 100%;
             padding: 10px;
             margin-top: 10px;
@@ -83,25 +86,53 @@
             font-size: 16px;
             border-radius: 5px;
         }
+
         .btn-log {
             background: black;
             color: white;
         }
+
         .btn-sign {
             background: grey;
             color: black;
         }
+
         .error {
             color: red;
             font-size: 14px;
         }
+
+        .password-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            width: 100%;
+            max-width: 250px;
+        }
+
+        .password-container input {
+            flex: 1;
+            padding: 8px 35px 8px 10px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .toggle-eye {
+            position: absolute;
+            right: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            color: black;
+        }
     </style>
     <script>
+
         function showSignupForm() {
             document.getElementById('loginForm').style.display = 'none';
             document.getElementById('signupForm').style.display = 'block';
         }
-        
+
         function validateEmail(email) {
             let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             return emailPattern.test(email);
@@ -117,27 +148,57 @@
             let email = document.getElementById('signupEmail').value;
             let password = document.getElementById('signupPassword').value;
             let confirmPassword = document.getElementById('confirmPassword').value;
-            
+
             if (!validateEmail(email)) {
                 alert("Invalid email format. Example: user@example.com");
                 return;
             }
-            
+
             if (!validatePassword(password)) {
                 alert("Password must be at least 8 characters long, include uppercase, lowercase, a number, and a special character.");
                 return;
             }
-            
+
             if (password !== confirmPassword) {
                 alert("Passwords do not match!");
                 return;
             }
-            
+
             alert("Signup successful! Redirecting to login page...");
             window.location.href = "login.html";
         }
+        function handleLogin(event) {
+            event.preventDefault();
+
+            let email = document.getElementById('email').value;
+            let password = document.getElementById('password').value;
+
+            let correctEmail = "yashwantsahoo05@gmail.com"; 
+            let correctPassword = "Yashwant@123"; 
+
+            if (email === correctEmail && password === correctPassword) {
+                alert("Login successful! Redirecting...");
+                window.location.href = "income_setup.html";
+            } else {
+                alert("Invalid email or password. Please try again.");
+            }
+        }
+
+        function togglePassword(id) {
+            let passwordField = document.getElementById(id);
+            let icon = document.getElementById(id + "-icon");
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                icon.textContent = "👁️";
+            } else {
+                passwordField.type = "password";
+                icon.textContent = "👁️‍🗨️";
+            }
+        }
+
     </script>
 </head>
+
 <body>
     <nav class="navbar-custom">
         <a href="index.html">Dashboard</a>
@@ -146,33 +207,48 @@
         <a href="reports.html">Reports</a>
         <a href="login.html" class="active">Login</a>
     </nav>
-    
+
     <div class="content">
         <div class="login-card" id="loginForm">
             <h2>Login</h2>
-            <form>
+            <form onsubmit="handleLogin(event)">
                 <label for="email">Email</label>
-                <input type="email" id="email" placeholder="Enter your email"><br>
+                <input type="email" id="email" placeholder="Enter your email" required><br>
                 <label for="password">Password</label>
-                <input type="password" id="password" placeholder="Enter password">
+                <div class="password-container">
+                    <input type="password" id="password" placeholder="Enter password" required>
+                    <span class="toggle-eye" id="password-icon" onclick="togglePassword('password')">👁️‍🗨️</span>
+                </div>
                 <button type="submit" class="btn-log">Login</button>
                 <button type="button" class="btn-sign" onclick="showSignupForm()">Sign Up</button>
             </form>
         </div>
-        <div class="login-card" id="signupForm" style="display:none;">
-            <h2>Sign Up</h2>
-            <form onsubmit="handleSignup(event)">
-                <label for="signupUsername">Username</label>
-                <input type="text" id="signupUsername" placeholder="Enter Username"><br>
-                <label for="signupEmail">Email</label>
-                <input type="email" id="signupEmail" placeholder="Enter Email"><br>
-                <label for="signupPassword">Password</label>
-                <input type="password" id="signupPassword" placeholder="Enter Password"><br>
-                <label for="confirmPassword">Confirm Password</label>
-                <input type="password" id="confirmPassword" placeholder="Confirm Password"><br>
-                <button type="submit" class="btn-log">Submit</button>
-            </form>
-        </div>
+    </div>
+
+
+    <div class="login-card" id="signupForm" style="display:none;">
+        <h2>Sign Up</h2>
+        <form onsubmit="handleSignup(event)">
+            <label for="signupUsername">Username</label>
+            <input type="text" id="signupUsername" placeholder="Enter Username"><br>
+            <label for="signupEmail">Email</label>
+            <input type="email" id="signupEmail" placeholder="Enter Email"><br>
+            <label for="signupPassword">Password</label>
+            <div class="password-container">
+                <input type="password" id="signupPassword" placeholder="Enter Password">
+                <span class="toggle-eye" id="signupPassword-icon"
+                    onclick="togglePassword('signupPassword')">👁️‍🗨️</span>
+            </div>
+            <label for="confirmPassword">Confirm Password</label>
+            <div class="password-container">
+                <input type="password" id="confirmPassword" placeholder="Confirm Password">
+                <span class="toggle-eye" id="confirmPassword-icon"
+                    onclick="togglePassword('confirmPassword')">👁️‍🗨️</span>
+            </div>
+            <button type="submit" class="btn-log">Submit</button>
+        </form>
+    </div>
     </div>
 </body>
+
 </html>

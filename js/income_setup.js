@@ -1,5 +1,7 @@
 document.getElementById("incomeSetupForm").addEventListener("submit", function (event) {
-    event.preventDefault();
+    event.preventDefault(); 
+
+    console.log("Form submitted!");
 
     let monthlyIncome = parseFloat(document.getElementById("monthlyIncome").value) || 0;
     let foodLimit = parseFloat(document.getElementById("foodLimit").value) || 0;
@@ -30,8 +32,8 @@ document.getElementById("incomeSetupForm").addEventListener("submit", function (
 
     localStorage.setItem("budgetData", JSON.stringify(budgetData));
 
-    alert("Budget saved successfully!");
-    window.location.href = "index.html";
-
-
+    console.log("Redirecting to index.html..."); // 
+    setTimeout(() => {
+        window.location.href = "./index.html"; 
+    }, 1000);
 });
