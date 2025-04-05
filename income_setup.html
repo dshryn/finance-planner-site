@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Income Setup</title>
+    <style>
+        body {
+            background-image: url('https://images.unsplash.com/photo-1595468760552-f1dce2325731?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fHx8fA%3D%3D');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            color: white;
+            overflow-y: auto;
+        }
+
+        .setup-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 100%;
+            text-align: left;
+            color: black;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            margin: auto;
+            margin-top: 100px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .btn-save {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            background: black;
+            color: white;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="setup-card">
+        <h2>Set Your Monthly Budget</h2>
+        <form id="incomeSetupForm">
+            <label for="monthlyIncome">Monthly Income</label>
+            <input type="number" id="monthlyIncome" placeholder="Enter your income" required>
+
+            <label for="foodLimit">Food Expense Limit</label>
+            <input type="number" id="foodLimit" placeholder="Enter food limit" required>
+
+            <label for="travelLimit">Travel Expense Limit</label>
+            <input type="number" id="travelLimit" placeholder="Enter travel limit" required>
+
+            <label for="rentLimit">Rent Expense Limit</label>
+            <input type="number" id="rentLimit" placeholder="Enter rent limit" required>
+
+            <label for="shoppingLimit">Shopping Expense Limit</label>
+            <input type="number" id="shoppingLimit" placeholder="Enter shopping limit" required>
+
+            <label for="carLimit">Car Expense Limit</label>
+            <input type="number" id="carLimit" placeholder="Enter car limit" required>
+
+            <label for="otherLimit">Other Expenses</label>
+            <input type="number" id="otherLimit" placeholder="Enter other expenses" required>
+
+            <p class="error" id="errorMsg">Total expenses cannot exceed your monthly income!</p>
+
+            <button type="submit" class="btn-save">Save</button>
+        </form>
+    </div>
+
+    <script src="js/income_setup.js"></script>
+
+</body>
+
+</html>
