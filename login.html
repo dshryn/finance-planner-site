@@ -152,11 +152,11 @@
 
 <body>
     <nav class="navbar-custom">
-        <a href="index.html">Dashboard</a>
-        <a href="transactions.html">Transactions</a>
-        <a href="budget.html">Budget</a>
-        <a href="reports.html">Reports</a>
-        <a href="login.html" class="active">Login</a>
+        <a href="/">Dashboard</a>
+        <a href="/transactions">Transactions</a>
+        <a href="/budget">Budget</a>
+        <a href="/reports">Reports</a>
+        <a href="/login" class="active">Login</a>
     </nav>
 
 
@@ -211,7 +211,7 @@
             let email = document.getElementById('signupEmail').value;
             let password = document.getElementById('signupPassword').value;
             let confirmPassword = document.getElementById('confirmPassword').value;
-
+            alert(email)
             if (!validateEmail(email)) {
                 alert("Invalid email format. Example: user@example.com");
 

@@ -10,9 +10,26 @@ app = express()
 app.use(bparser.urlencoded({extended:true}))
 app.use(session({secret:process.env.SERVER_SECRET_KEY,resave:false,saveUninitialized:false,cookie:{maxAge:1000*60*30,secure:false,httpOnly:true}}))
 app.use(express.json())
+
+//home page
 app.get('/',function(req,res){
     res.sendFile(__dirname+'/'+'index.html')
 })
+
+//transactions page
+app.get('/transactions',function(req,res){
+    res.sendFile(__dirname+'/'+'transactions.html')
+})
+
+//reports page
+app.get('/reports',function(req,res){
+    res.sendFile(__dirname+'/'+'reports.html')
+})
+
+app.get('/budget',function(req,res){
+    res.sendFile(__dirname+'/'+'budget.html')
+})
+//login page
 app.get('/login',function(req,res){
     res.sendFile(__dirname+'/'+'login.html')
     
