@@ -112,12 +112,6 @@
             <h2 class="text-center">Transactions</h2>
             <form id="transaction-form" class="mb-4" action="/transSubmit" method="POST">
                 <div class="row">
-                    <div class="col-md-3">
-                        <input type="text" id="description" name="description" class="form-control" placeholder="Description" required>
-                    </div>
-                    <div class="col-md-2">
-                        <input type="number" id="amount" name="amount" class="form-control" placeholder="Amount" required>
-                    </div>
                     <div class="col-md-2">
                         <select id="category" name="category" class="form-control">
                             <option value="Food">Food</option>
@@ -129,6 +123,12 @@
                             <option value="Other">Other</option>
                             
                         </select>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" id="description" name="description" class="form-control" placeholder="Description" required>
+                    </div>
+                    <div class="col-md-2">
+                        <input type="number" id="amount" name="amount" class="form-control" placeholder="Amount" required>
                     </div>
                     <div class="col-md-3">
                         <select id="month" name="month">
@@ -152,18 +152,7 @@
                     </div>
                 </div>
             </form>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Description</th>
-                        <th>Amount</th>
-                        <th>Category</th>
-                        <th>Date</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody id="transaction-list"></tbody>
-            </table>
+            
         </div>
     </div>
     <!-- <script src="js/transactions.js"></script> -->

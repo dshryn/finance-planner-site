@@ -9,6 +9,32 @@
         setup = param.get('setup')
         if(setup=='true')
         alert("Budget set sucessfully!!")
+        logout = param.get('logout')
+        if(logout=='success')
+        alert('logged out sucessfully !!')
+        else if(logout=='invalid')
+        alert('no account logged into!!')
+        else if(logout=='error')
+        alert('Unable to logout!!')
+        
+        async function updateDashboard() {
+    try {
+      const response = await fetch('/setDashboard');
+      if (!response.ok) {
+        throw new Error('Failed to fetch dashboard data');
+      }
+
+      const data = await response.json();
+      const { total_income, total_expense, balance } = data;
+      document.getElementById('total_income').innerHTML = total_income;
+      document.getElementById('total_expenses').innerHTML = total_expense;
+      document.getElementById('balance').innerHTML = balance;
+
+    } catch (error) {
+      alert('unable to fetch data!!')
+    }
+  }
+  window.onload = updateDashboard;
     </script>
 </head>
 
@@ -109,7 +135,7 @@
                                     <h5 class="card-title"
                                         style="background: rgba(0, 0, 0, 0.6); padding: 5px; border-radius: 5px;">Total
                                         Income</h5>
-                                    <p class="card-text" id="total-income">$0.00</p>
+                                    <p class="card-text" id="total_income">$0.00</p>
                                 </div>
                             </div>
                         </div>
@@ -119,7 +145,7 @@
                                     <h5 class="card-title"
                                         style="background: rgba(0, 0, 0, 0.6); padding: 5px; border-radius: 5px;">Total
                                         Expenses</h5>
-                                    <p class="card-text" id="total-expenses">$0.00</p>
+                                    <p class="card-text" id="total_expenses">$0.00</p>
                                 </div>
                             </div>
                         </div>
@@ -131,6 +157,11 @@
                                         Balance</h5>
                                     <p class="card-text" id="balance">$0.00</p>
                                 </div>
+                            </div>
+                            <div>
+                                <form action="/logout" method="GET">
+                                    <button type="submit">Logout</button>
+                                </form>
                             </div>
                         </div>
                     </div>

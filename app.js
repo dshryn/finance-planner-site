@@ -15,7 +15,22 @@ app.use(express.json())
 app.get('/',function(req,res){
     res.sendFile(__dirname+'/'+'index.html')
 })
-
+app.get('/logout',function(req,res){
+    if(req.session.uid)
+    {
+        req.session.destroy(err=>{
+            if(err)
+                {res.redirect('/?logout=error')
+                    console.log(err)
+                }
+                res.clearCookie('connect.sid')
+                res.redirect('/?logout=success')
+        });
+    }
+    else{
+        res.redirect('/?logout=invalid')
+    }
+})
 //transactions page
 app.get('/transactions',function(req,res){
     if(req.session.uid)
@@ -259,7 +274,24 @@ app.get('/api/reports', async (req, res) => {
         res.redirect('/reports?fetch=false');
     }
 });
-
+app.get('/setDashboard', async function(req,res) {
+    if(req.session.uid)
+    {
+        var income;
+        var expense;
+        var balance;
+        const query = 'SELECT sum(total_income) AS income,sum(total_expense) AS expense,sum(total_income-total_expense) AS balance FROM report WHERE uid=$1 AND month=$2'
+        const val = [req.session.uid,'April']
+        const result = await pool.query(query,val)
+        income = result.rows[0].income;
+        expense = result.rows[0].expense;
+        balance = result.rows[0].balance;
+        res.json({total_income:income,total_expense:expense,balance:balance});
+        }
+    else
+    res.json({total_income:0,total_expense:0,balance:0});
+  });
+  
 
 
 app.listen('8000')
