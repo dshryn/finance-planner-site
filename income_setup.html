@@ -61,32 +61,57 @@
             display: none;
         }
     </style>
+    <script>
+        param = new URLSearchParams(window.location.search)
+        setup = param.get('setup')
+        if(setup=='false')
+        alert("Problem while Insertion!!, Please try again")
+    </script>
 </head>
 <body>
 
     <div class="setup-card">
         <h2>Set Your Monthly Budget</h2>
-        <form id="incomeSetupForm">
+        <form id="incomeSetupForm" action="/setupSubmit" method="POST">
+            <label for="month">Choose a month:</label>
+            <br>
+            <select id="month" name="month">
+            <option value="">--Select--</option>
+            <option value="January">January</option>
+            <option value="February">February</option>
+            <option value="March">March</option>
+            <option value="April">April</option>
+            <option value="May">May</option>
+            <option value="June">June</option>
+            <option value="July">July</option>
+            <option value="August">August</option>
+            <option value="September">September</option>
+            <option value="October">October</option>
+            <option value="November">November</option>
+            <option value="December">December</option>
+            </select>
+            <br>
+            <br>
             <label for="monthlyIncome">Monthly Income</label>
-            <input type="number" id="monthlyIncome" placeholder="Enter your income" required>
+            <input type="number" id="monthlyIncome" name="monthlyIncome" placeholder="Enter your income" required>
 
             <label for="foodLimit">Food Expense Limit</label>
-            <input type="number" id="foodLimit" placeholder="Enter food limit" required>
+            <input type="number" id="foodLimit" name="foodLimit" placeholder="Enter food limit" required>
 
             <label for="travelLimit">Travel Expense Limit</label>
-            <input type="number" id="travelLimit" placeholder="Enter travel limit" required>
+            <input type="number" id="travelLimit" name="travelLimit" placeholder="Enter travel limit" required>
 
             <label for="rentLimit">Rent Expense Limit</label>
-            <input type="number" id="rentLimit" placeholder="Enter rent limit" required>
+            <input type="number" id="rentLimit" name="rentLimit" placeholder="Enter rent limit" required>
 
             <label for="shoppingLimit">Shopping Expense Limit</label>
-            <input type="number" id="shoppingLimit" placeholder="Enter shopping limit" required>
+            <input type="number" id="shoppingLimit" name="shoppingLimit" placeholder="Enter shopping limit" required>
 
-            <label for="carLimit">Car Expense Limit</label>
-            <input type="number" id="carLimit" placeholder="Enter car limit" required>
+            <label for="carLimit">Vehicle Expense Limit</label>
+            <input type="number" id="vehicleLimit" name="vehicleLimit" placeholder="Enter car limit" required>
 
             <label for="otherLimit">Other Expenses</label>
-            <input type="number" id="otherLimit" placeholder="Enter other expenses" required>
+            <input type="number" id="otherLimit" name="otherLimit" placeholder="Enter other expenses" required>
 
             <p class="error" id="errorMsg">Total expenses cannot exceed your monthly income!</p>
 

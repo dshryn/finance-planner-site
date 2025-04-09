@@ -130,6 +130,14 @@
         }
     </style>
     <script>
+        const params = new URLSearchParams(window.location.search)
+        const signup = params.get('signup')
+        if(signup=="fail")
+        alert("Sign up failed!! Please try again")
+        else if(signup == "exists")
+        alert("User with this email ID already exists!!")
+        else if(signup == "success")
+        alert("User account sucessfully created!!")
         function showSignupForm() {
             document.getElementById('loginForm').style.display = 'none';
             document.getElementById('signupForm').style.display = 'block';
@@ -171,7 +179,7 @@
                 <label for="password">Password</label>
                 <div class="password-container">
                     <input type="password" id="loginPassword" placeholder="Enter password" name="loginPassword" required>
-                    <span class="toggle-eye" id="password-icon" onclick="togglePassword('password')">👁️‍🗨️</span>
+                    <span class="toggle-eye" id="password-icon" onclick="togglePassword('loginPassword')">👁️‍🗨️</span>
                 </div>
                 <button type="submit" class="btn-log">Login</button>
                 <button type="button" class="btn-sign" onclick="showSignupForm()">Sign Up</button>
@@ -211,7 +219,6 @@
             let email = document.getElementById('signupEmail').value;
             let password = document.getElementById('signupPassword').value;
             let confirmPassword = document.getElementById('confirmPassword').value;
-            alert(email)
             if (!validateEmail(email)) {
                 alert("Invalid email format. Example: user@example.com");
 
@@ -226,7 +233,6 @@
             }
             else
             {
-            alert("Signup successful! Redirecting to login page...")
             signupForm.submit();
             }
             
@@ -247,11 +253,15 @@
             let loginPassword = document.getElementById('loginPassword').value;
             const res = await fetch('/loginSubmit',{method:"POST",headers:{'Content-Type':'application/json'},body:JSON.stringify({loginEmail,loginPassword})});
             const result = await res.json();
-            
             if(result.success)
             {
-                alert("logged in sucessfully!!, redirecting to dashboard")
-                window.location.href='/'
+                if(result.no_login==0)
+                {
+                    window.location.href='/setIncome'
+                }
+                else{
+                alert("logged in sucessfully!!  redirecting to dashboard")
+                window.location.href='/'}
             }
             else{
                 alert("Invalid email/password, please enter again")

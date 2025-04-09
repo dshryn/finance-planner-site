@@ -1,6 +1,8 @@
 <html>
 <head>
     <title>Budget Planner - Reports</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+   
 </head>
 
 <body style="background-image: url('https://images.unsplash.com/photo-1543286386-713bdd548da4?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); 
@@ -25,25 +27,116 @@
     <div class="container mt-4 content">
         <div class="card">
             <h2 class="text-center">Reports & Insights</h2>
-            <div class="row">
-                <div class="col-md-6">
-                    <h5>Spending Breakdown</h5>
-                    <canvas id="spendingPieChart"></canvas>
-                </div>
-                <div class="col-md-6">
-                    <h5>Monthly Expense Trends</h5>
-                    <canvas id="expenseBarChart"></canvas>
-                </div>
+            
+            <label for="monthSelect">Choose Month:</label>
+            <select id="monthSelect" onchange="updateChart()">
+                <option value="January">January</option>
+                <option value="February">February</option>
+                <option value="March">March</option>
+                <option value="April">April</option>
+                <option value="May">May</option>
+                <option value="June">June</option>
+                <option value="July">July</option>
+                <option value="August">August</option>
+                <option value="September">September</option>
+                <option value="October">October</option>
+                <option value="November">November</option>
+                <option value="December">December</option>
+            </select>
+
+            <label for="categorySelect">Choose Category:</label>
+            <select id="categorySelect" onchange="updateChart()">
+                <option value="Food">Food</option>
+                <option value="Travel">Travel</option>
+                <option value="Rent">Rent</option>
+                <option value="Shopping">Shopping</option>
+                <option value="Vehicle">Vehicle</option>
+                <option value="Medicines">Medicines</option>
+                <option value="Other">Other</option>
+            </select>
+
+            <canvas id="categoryChart" style="margin-top: 20px;"></canvas>
+            <div id="noDataMsg" style="display: none; color: red; font-weight: bold; margin-top: 10px;">
+                No data available for this selection.
             </div>
         </div>
     </div>
-
-    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="js/reports.js"></script> -->
-
+    <script>
+        let reportData = {};
+    
+        async function fetchReportData() {
+            try {
+                const res = await fetch('/api/reports');
+                if (!res.ok) throw new Error('Failed to fetch report data');
+                reportData = await res.json();
+                updateChart();  // call chart update once data is loaded
+            } catch (err) {
+                console.error('Fetch error:', err);
+                document.getElementById('noDataMsg').innerText = 'Failed to load data.';
+                document.getElementById('noDataMsg').style.display = 'block';
+            }
+        }
+    
+        const ctx = document.getElementById('categoryChart').getContext('2d');
+        let categoryChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Category Budget', 'Total Expense', 'Category Balance'],
+                datasets: [{
+                    label: 'Amount in ₹',
+                    data: [0, 0, 0],
+                    backgroundColor: ['#4CAF50', '#F44336', '#2196F3']
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { color: 'black' }
+                    },
+                    x: {
+                        ticks: { color: 'black' }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        labels: { color: 'black' }
+                    },
+                    tooltip: {
+                        backgroundColor: 'beige',
+                        bodyColor: 'black',
+                        titleColor: 'black'
+                    }
+                }
+            }
+        });
+    
+        function updateChart() {
+            const month = document.getElementById('monthSelect').value;
+            const category = document.getElementById('categorySelect').value;
+            const key = `${month}_${category}`;
+            const msg = document.getElementById('noDataMsg');
+    
+            if (!reportData[key]) {
+                msg.innerText = 'No data available for this selection.';
+                msg.style.display = 'block';
+                categoryChart.data.datasets[0].data = [0, 0, 0];
+            } else {
+                msg.style.display = 'none';
+                const { total_income, total_expense } = reportData[key];
+                const balance = total_income - total_expense;
+                categoryChart.data.datasets[0].data = [total_income, total_expense, balance];
+            }
+            categoryChart.update();
+        }
+    
+        window.onload = fetchReportData;
+    </script>
+    
+    
     <style>
         body {
-            background-image: url('https://images.unsplash.com/photo-1595468760552-f1dce2325731?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
             background-position: center;
             min-height: 100vh;
             display: flex;
@@ -108,7 +201,7 @@
             align-items: center;
             align-content: center;
             border-radius: 10px;
-            max-width: 500px;
+            max-width: 600px;
             width: 100%;
             text-align: left;
             color: black;
@@ -126,7 +219,18 @@
             border-radius: 10px;
             width: 100%;
         }
+
+        label, select {
+            margin: 10px 0;
+            display: block;
+            font-weight: bold;
+        }
+
+        select {
+            padding: 5px;
+            border-radius: 5px;
+            width: 100%;
+        }
     </style>
 </body>
-
 </html>
